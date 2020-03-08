@@ -1,4 +1,4 @@
-import { observable, action } from 'mobx';
+import { observable, action, computed } from 'mobx';
 import { createContext } from 'react';
 import { IActivity } from '../models/activity';
 import agent from '../api/agent';
@@ -9,6 +9,12 @@ class ActivityStore {
   @observable loadingInitial = false;
   @observable editMode = false;
   @observable submitting = false;
+
+  @computed get activitiesByDate() {
+    return this.activities.sort(
+      (a, b) => Date.parse(a.date) - Date.parse(b.date)
+    );
+  }
 
   @action loadActivities = async () => {
     this.loadingInitial = true;
@@ -36,17 +42,17 @@ class ActivityStore {
       this.submitting = true;
       console.log(error);
     }
-  }
+  };
 
   @action openCreateForm = () => {
     this.editMode = true;
     this.selectedActivity = undefined;
-  }
+  };
 
   @action selectActivity = (id: string) => {
     this.selectedActivity = this.activities.find(a => a.id === id);
     this.editMode = false;
-  }
+  };
 }
 
 export default createContext(new ActivityStore());
