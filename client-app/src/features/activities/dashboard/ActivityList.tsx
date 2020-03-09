@@ -5,7 +5,13 @@ import ActivityStore from '../../../app/stores/activityStore';
 
 const ActivityList: React.FC = () => {
   const activityStore = useContext(ActivityStore);
-  const { activitiesByDate, selectActivity, deleteActivity, submitting, target } = activityStore;
+  const {
+    activitiesByDate,
+    selectActivity,
+    deleteActivity,
+    submitting,
+    target
+  } = activityStore;
   return (
     <Segment clearing>
       <Item.Group divided>
