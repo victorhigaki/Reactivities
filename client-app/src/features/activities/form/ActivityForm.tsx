@@ -19,7 +19,6 @@ const ActivityForm: React.FC<RouteComponentProps<DetailParams>> = ({
     createActivity,
     editActivity,
     submitting,
-    cancelFormOpen,
     activity: initialFormState,
     loadActivity,
     clearActivity
@@ -35,7 +34,6 @@ const ActivityForm: React.FC<RouteComponentProps<DetailParams>> = ({
     venue: ''
   });
 
-
   useEffect(() => {
     if (match.params.id && activity.id.length === 0) {
       loadActivity(match.params.id).then(
@@ -45,8 +43,13 @@ const ActivityForm: React.FC<RouteComponentProps<DetailParams>> = ({
     return () => {
       clearActivity();
     };
-  }, [loadActivity, clearActivity, match.params.id, initialFormState, activity.id.length]);
-
+  }, [
+    loadActivity,
+    clearActivity,
+    match.params.id,
+    initialFormState,
+    activity.id.length
+  ]);
 
   const handleSubmit = () => {
     if (activity.id.length === 0) {
@@ -54,9 +57,13 @@ const ActivityForm: React.FC<RouteComponentProps<DetailParams>> = ({
         ...activity,
         id: uuid()
       };
-      createActivity(newActivity).then(() => history.push(`/activities/${newActivity.id}`))
+      createActivity(newActivity).then(() =>
+        history.push(`/activities/${newActivity.id}`)
+      );
     } else {
-      editActivity(activity).then(() => history.push(`/activities/${activity.id}`));
+      editActivity(activity).then(() =>
+        history.push(`/activities/${activity.id}`)
+      );
     }
   };
 
@@ -116,7 +123,7 @@ const ActivityForm: React.FC<RouteComponentProps<DetailParams>> = ({
           content="Submit"
         />
         <Button
-          onClick={cancelFormOpen}
+          onClick={() => history.push('/activities')}
           floated="right"
           type="button"
           content="Cancel"
