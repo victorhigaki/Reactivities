@@ -3,21 +3,17 @@ import { Item, Button, Segment, Icon } from 'semantic-ui-react';
 import { Link } from 'react-router-dom';
 import { IActivity } from '../../../app/models/activity';
 
-export const ActivityListItem: React.FC<{ activity: IActivity }> = ({
-  activity
-}) => {
+const ActivityListItem: React.FC<{ activity: IActivity }> = ({ activity }) => {
   return (
     <Segment.Group>
       <Segment>
         <Item.Group>
           <Item>
             <Item.Image size="tiny" circular src="/assets/user.png" />
-            <Item key={activity.id}>
-              <Item.Content>
-                <Item.Header as="a">{activity.title}</Item.Header>
-                <Item.Description>Hosted by Bob</Item.Description>
-              </Item.Content>
-            </Item>
+            <Item.Content>
+              <Item.Header as="a">{activity.title}</Item.Header>
+              <Item.Description>Hosted by Bob</Item.Description>
+            </Item.Content>
           </Item>
         </Item.Group>
       </Segment>
@@ -39,3 +35,5 @@ export const ActivityListItem: React.FC<{ activity: IActivity }> = ({
     </Segment.Group>
   );
 };
+
+export default ActivityListItem;
