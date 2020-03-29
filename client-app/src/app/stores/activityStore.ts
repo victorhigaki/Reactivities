@@ -48,7 +48,6 @@ class ActivityStore {
       runInAction('load activities error', () => {
         this.loadingInitial = false;
       });
-      console.log(error);
     }
   };
 
@@ -85,7 +84,7 @@ class ActivityStore {
     this.submitting = true;
     try {
       await agent.Activities.create(activity);
-      runInAction('creating activity', () => {
+      runInAction('create activity', () => {
         this.activityRegistry.set(activity.id, activity);
         this.submitting = false;
       });
